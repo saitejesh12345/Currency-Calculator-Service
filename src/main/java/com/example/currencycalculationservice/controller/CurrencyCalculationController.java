@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class CurrencyCalculationController {
 
@@ -42,10 +44,19 @@ public class CurrencyCalculationController {
     @PostMapping(value = "/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
     public ExchangeResponse calculateAmount(@RequestBody ExchangeRequest exchangeRequest,
                                             @PathVariable String from,
-                                            @PathVariable String to, @ApiParam(value = "The quantity is example 10")
-                                                @PathVariable int quantity) {
+                                            @PathVariable String to,
+                                            @PathVariable int quantity) {
         exchangeRequest.setFrom(from);
-       exchangeRequest.setTo(to);
-        return service.calculateAmount(exchangeRequest,quantity);
+        exchangeRequest.setTo(to);
+        return service.calculateAmount(exchangeRequest, quantity);
+    }
+
+
+    @GetMapping("/transactions")
+    public List<ExchangeResponse> getAllTransactions() {
+        // Call the service method to retrieve all transactions
+        List<ExchangeResponse> transactions = service.getAllTransactions();
+
+        return transactions;
     }
 }
