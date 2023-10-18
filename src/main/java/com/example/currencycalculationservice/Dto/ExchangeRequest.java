@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
@@ -20,6 +21,8 @@ public class ExchangeRequest {
     private String from;
     @JsonIgnore
     private String to;
+
+    @NotBlank
     private BigDecimal conversionMultiple;
 
 
